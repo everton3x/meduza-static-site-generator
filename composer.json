@@ -1,0 +1,21 @@
+{
+    "name": "everton3x/meduza",
+    "description": "Outro gerenciador de sites estáticos escrito em PHP7",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Everton da Rosa",
+            "email": "everton3x@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Meduza\\": "src/Meduza",
+            "PTK\\": "src/PTK"
+        }
+    }
+}

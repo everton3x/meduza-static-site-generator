@@ -1,0 +1,80 @@
+# Arquivo de configuração principal
+# O nome e o caminho do arquivo podem ser modificados, entretanto, é 
+# interessante que ele fique no diretório raíz do projeto, pois evita problemas
+---
+# Configuração do site
+site:
+    title: "Meduza Static Site Generator"
+    description: "Site de exemplo com Meduza."
+    url: "http://localhost:8000"
+    # url base do site. Útil quando o site ficar em um subdiretório do site, 
+    # como em user.github.io/mysite
+    author: "Everton da Rosa"
+    # nome curto do site. Útil para usar no lugar do logotipo.
+    name: "Meduza"
+
+# configuração sobre o conteúdo
+content:
+    # diretório onde fica o conteúdo do site que será convertido em html
+    # o conteúdo pode ser markdown, restructured text ou outro, de acordo com
+    # os parser configurados
+    # a estrutura interna desta opção será preservada.
+    source: "content"
+    # conteúdo estático, como imagens, css, js, etc. Não é parseado, porém 
+    # copiado para o diretório de geração.
+    static: "static"
+    
+# Valores padrão para diversas configurações.
+defaults:
+    # o template padrão quando nada for especificado no front matter
+    template: "post"
+
+# configurações de construção
+output:
+    # lista de parsers habilitados
+    # a key é a extensão de arquivo e o valor é o nome da classe que implementa 
+    # Meduza\Parser\ParserInterface
+    parsers: {
+        md: "ErusevParsedown",
+        markdown: "ErusevParsedown"
+    }
+    # diretório onde serão salvos os arquivos convertidos e o conteúdo estático.
+    target: "dist" # destination dir to files
+    
+# configurações sobre o tema a ser utilziado
+theme:
+    # diretório onde estão os temas disponíveis
+    dir: "themes"
+
+# Configurações de plugins
+plugins:
+    # diretório onde estão os plugins
+    dir: "plugins"
+    # lista de plugins. Usar o nomedas classes que implementam 
+    # Meduza\Plugin\PluginInterface, porém sem o sufixo Plugin
+    active: ["Tags"]
+
+# Arquivos de ocnfiguração que são carregados junto com este.
+# bom para manter configurações dos temas, só que habilitando um por vez.
+extra-config: [
+    "extra-config/theme/saturn.yml"
+]
+
+# Configurações de mídas sociais
+social:
+    github: "https://github.com/everton3x/"
+    email: "mailto:everton3x@gmail.com"
+    facebook: "https://facebook.com/everton3x/"
+    linkedin: "https://www.linkedin.com/in/everton-da-rosa/"
+
+# Itens a serem mostrados na navbar principal
+navbar:
+    About: "pages/about.html"
+    "See on Github": "https://github.com/everton3x/meduza"
+
+# Configurações de diferentes environments
+# Environments (env) são configurações especiais para diferentes ambientes.
+# development e production são obrigatórias
+environment:
+    development: "environments/development/main.yml"
+    production: "environments/production/main.yml"
