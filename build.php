@@ -5,13 +5,17 @@
  * Por enquanto é apenas para teste.
  */
 
-require_once 'vendor/autoload.php';
-
-$config = new Meduza\Config\Loader('meduza.yml');
+require_once 'bootstrap.php';
 
 $env = Meduza\Environment\Environment::DEVELOPMENT;
 //$env = Meduza\Environment::PRODUTION;
 
-$builder = new Meduza\Build\Builder($config);
+$configLoader = new Meduza\Config\Loader();
 
-$builder->build($env);
+$config = $configLoader->load('meduza.yml', $env);
+
+print_r($config);
+
+//$builder = new Meduza\Build\Builder($config);
+//
+//$builder->build();

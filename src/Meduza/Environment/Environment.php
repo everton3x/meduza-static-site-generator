@@ -8,5 +8,6 @@ namespace Meduza\Environment;
  */
 class Environment
 {
-    //put your code here
+    const DEVELOPMENT = 'development';
+    const PRODUCTION = 'production';
 }

@@ -6,9 +6,11 @@
 site:
     title: "Meduza Static Site Generator"
     description: "Site de exemplo com Meduza."
-    url: "http://localhost:8000"
+    #url: "http://localhost:8000"
     # url base do site. Útil quando o site ficar em um subdiretório do site, 
     # como em user.github.io/mysite
+    # defina a url local nas configurações de desenvolvimento
+    # defina a url de produção nas configurações de produção
     author: "Everton da Rosa"
     # nome curto do site. Útil para usar no lugar do logotipo.
     name: "Meduza"

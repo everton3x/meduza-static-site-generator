@@ -12,5 +12,14 @@ namespace Meduza\Build;
  */
 class Builder
 {
-    //put your code here
+    /**
+     *
+     * @var array Configurações
+     */
+    protected array $config;
+    
+    public function __construct(array $config)
+    {
+        $this->config;
+    }
 }
