@@ -78,11 +78,11 @@ class Directory
     
     public function realpath(): Directory
     {
-        $this->path = \realpath($this->path);
+        $this->path = (new Path(\realpath($this->path)))->endSlash()->get();
         return $this;
     }
     
-    public function get(bool $object)
+    public function get(bool $object = false)
     {
         if($object){
             return new \Directory($this->path);

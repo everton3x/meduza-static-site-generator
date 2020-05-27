@@ -71,6 +71,9 @@ class Builder
         $logger->debug('Foram preparadas {meta-pages} meta-páginas.', [
             'meta-pages' => count($buildRepo->get('meta-pages'))
         ]);
+//        foreach ($buildRepo->get('meta-pages') as $key => $metapage){
+//            echo $metapage['slug'], PHP_EOL;
+//        }
 //        print_r($buildRepo);
         //</constroi meta-paginas>
         
