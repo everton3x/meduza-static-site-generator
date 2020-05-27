@@ -14,8 +14,20 @@ $configLoader = new Meduza\Config\Loader();
 
 $config = $configLoader->load('meduza.yml', $env);
 
-print_r($config);
+$logger = new LogMan\LogMan();
+$logger->toggleDebug(true);
+$stdoutLogger = new LogMan\Logger\StdOutLogger();
+$stdoutLogger->setLoggerName('Terminal');
+$logger->assignLoggerToEmergencyLevel($stdoutLogger)
+    ->assignLoggerToAlertLevel($stdoutLogger)
+    ->assignLoggerToCriticalLevel($stdoutLogger)
+    ->assignLoggerToErrorLevel($stdoutLogger)
+    ->assignLoggerToWarningLevel($stdoutLogger)
+    ->assignLoggerToNoticeLevel($stdoutLogger)
+    ->assignLoggerToInfoLevel($stdoutLogger)
+    ->assignLoggerToDebugLevel($stdoutLogger);
+$logMessenger = $logger->getMessenger();
 
-//$builder = new Meduza\Build\Builder($config);
-//
-//$builder->build();
+$builder = new Meduza\Build\Builder();
+
+$builder->build($config, $logMessenger);

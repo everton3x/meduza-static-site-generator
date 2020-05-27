@@ -13,7 +13,8 @@
         "php": ">=7.4.5",
         "ext-yaml": "*",
         "erusev/parsedown": "^1.7",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "everton3x/logman": "^0.2.0"
     },
     "autoload": {
         "psr-4": {

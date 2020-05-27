@@ -12,14 +12,84 @@ namespace Meduza\Build;
  */
 class Builder
 {
-    /**
-     *
-     * @var array Configurações
-     */
-    protected array $config;
-    
-    public function __construct(array $config)
+
+    public function __construct()
     {
-        $this->config;
+        
+    }
+
+    public function build(array $config, \LogMan\Messenger\MessengerInterface $logger)
+    {
+        $logger->info("Construção iniciada em {now}", [
+            'now' => date('Y-m-d H:i:s')
+        ]);
+        
+        $logger->notice("Iniciando repositório de construção...");
+        $buildRepo = new BuildRepo();
+        
+        //<configurações>
+        $logger->notice("Salvando configurações no repositório de construção...");
+        $buildRepo->set('config', $config);
+        //</configurações>
+        
+        //<lendo conteúdo>
+        $logger->notice("Carregando conteúdo de {contentDir}", [
+            'contentDir' => $config['content']['source']
+        ]);
+        $processLoadContent = new \Meduza\Process\LoadContent($buildRepo, $logger);
+        $buildRepo = $processLoadContent->run();
+        $logger->debug('Foram encontrados em [{content}] {files} arquivos.', [
+            'content' => $buildRepo->get('config.content.source'),
+            'files' => count($buildRepo->get('content'))
+        ]);
+        //</lendo conteúdo>
+        
+        //<frontmatter>
+        $logger->notice("Carregando meta-dados dos arquivos de conteúdo...");
+        $processLoadFrontmatter = new \Meduza\Process\LoadFrontmatter($buildRepo, $logger);
+        $buildRepo = $processLoadFrontmatter->run();
+        $logger->debug('Foram encontrados meta-dados em {files} arquivos.', [
+            'files' => count($buildRepo->get('meta-data'))
+        ]);
+//        print_r($buildRepo->get('meta-data'));
+        //</frontmatter>
+        
+        //<content>
+        $logger->notice("Carregando conteúdo dos arquivos de conteúdo...");
+        $processLoadParsableContent = new \Meduza\Process\LoadParsableContent($buildRepo, $logger);
+        $buildRepo = $processLoadParsableContent->run();
+        $logger->debug('Foram encontrados conteúdo em {files} arquivos.', [
+            'files' => count($buildRepo->get('parsable'))
+        ]);
+//        print_r($buildRepo->get('parsable'));
+        //</content>
+        
+        //<constroi meta-paginas>
+        $logger->notice("Preparando meta-páginas...");
+        $processPrepareMetaPages = new \Meduza\Process\PrepareMetaPages($buildRepo, $logger);
+        $buildRepo = $processPrepareMetaPages->run();
+        $logger->debug('Foram preparadas {meta-pages} meta-páginas.', [
+            'meta-pages' => count($buildRepo->get('meta-pages'))
+        ]);
+//        print_r($buildRepo);
+        //</constroi meta-paginas>
+        
+        //<plugins>
+        //</plugins>
+        
+        //<parse conteúdo>
+        //</parse conteúdo>
+        
+        //<merge temas>
+        //</merge temas>
+        
+        //<salva output>
+        //</salva output>
+        
+        //<copia conteúdo estático>
+        //</copia conteúdo estático>
+        
+        ////<copia conteúdo estático do tema>
+        //</copia conteúdo estático do tema>
     }
 }
