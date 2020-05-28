@@ -102,24 +102,21 @@ class Directory
     
     public function remove(): Directory
     {
+//        print_r($this->path);
+        $this->path = (new Path($this->path))->slashes(DIRECTORY_SEPARATOR)->endSlash(DIRECTORY_SEPARATOR);
 //        echo $this->path, PHP_EOL;exit();
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->path));
-        
-        while($iterator->valid()){
-            $item = $iterator->current();
-            echo $item->getPathname(), PHP_EOL;
-//            print_r($item);
-//            if($item->getFilename() === '.' || $item->getFilename() === '..'){
-//                //não faz nada
-//            }elseif($item->isFile()){
-////                unlink($item->getPathname());
-//            }elseif ($item->isDir()) {
-//                (new Directory($item->getPathname()))->remove();
-////                rmdir($item->getPathname());
-////                echo $item->getPathname(), PHP_EOL;
-//            }
-            $iterator->next();
+        $files = array_diff(scandir($this->path), array('.', '..'));
+//        print_r($files);exit();
+        foreach ($files as $file) {
+            if(is_dir("{$this->path}$file")){
+                (new Directory("{$this->path}$file"))->remove();
+//                echo "Entra em {$this->path}$file", PHP_EOL;
+            }else{
+//                echo "exclui {$this->path}$file", PHP_EOL;
+                unlink("{$this->path}$file");
+            }
         }
+        rmdir($this->path);
         
         return $this;
     }

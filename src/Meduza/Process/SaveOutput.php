@@ -32,13 +32,23 @@ class SaveOutput
         
         $this->clearTarget($target);
         
+        foreach ($this->buildRepo->get('meta-pages') as $slug => $page){
+//            print_r($page);continue;
+            $fileOutput = str_replace(['//', '\\\\'], DIRECTORY_SEPARATOR, str_replace($this->buildRepo->get('config.site.url'), $target, $slug)).'.html';
+            $this->logger->debug("Salvando em $fileOutput");
+            
+            @mkdir(dirname($fileOutput), 0777, true);
+            file_put_contents($fileOutput, $this->buildRepo->get('output')[$slug]);
+        }
         
         return $this->buildRepo;
     }
     
     protected function clearTarget(string $target)
     {
+//        echo $target, PHP_EOL;exit();
         (new \PTK\FileSystem\Directory($target))->remove();
+        mkdir($target, 0777, true);
         
     }
 }
