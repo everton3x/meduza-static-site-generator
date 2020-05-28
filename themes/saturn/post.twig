@@ -1,0 +1,58 @@
+{% extends "partials/base.twig" %}
+
+{% block content %}
+    <!-- Introduction -->
+    <div class="intro">
+        <div class="container">
+            <div class="units-row">
+                <div class="unit-10">
+                    <img class="img-intro" src="{{ config.site.urlBase }}/{{ config.avatar }}" alt="">
+                </div>
+                <div class="unit-90">
+                    <p class="p-intro">{{ page.config.title }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <!-- Post -->
+            <div class="post">
+                {% if page.config.description is defined %}
+                    <!-- Heading -->
+                    <h1>{{ page.config.description}}</h1>
+                    <hr>
+                {% endif %}
+                <div class="in-content">
+                    {{ page.content }}
+                </div>
+                <div class="foot-post">
+                    <div class="units-row">
+                        {% if page.config.tags is defined %}
+                            <div class="unit-100">
+                                <strong>Tags:</strong>
+                                {% for tag in page.config.tags %}
+                                    <a class="badge" href="{{ config.site.urlBase }}/tags/{{ tag }}.html">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if config.disqus is defined %}
+                            <div class="unit-100">
+                                <a href="#disqus_thread">
+                                    <strong>COMMENTS:</strong>
+                                </a>.
+                            </div>
+                            <div class="unit-100">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div><!-- /post -->
+
+        </div>
+    </div>
+{% endblock %}
+

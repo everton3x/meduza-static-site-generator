@@ -1,0 +1,53 @@
+{% extends "partials/base.twig" %}
+
+{% block content %}
+    <!-- Introduction -->
+    <div class="intro">
+        <div class="container">
+            <div class="units-row">
+                <div class="unit-10">
+                    <img class="img-intro" src="{{ config.site.urlBase }}/img/avatar.png" alt="">
+                </div>
+                <div class="unit-90">
+                    <p class="p-intro">{{ config.site.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            {% for post in pages %}
+            <!-- Post -->
+            <div class="post">
+                <!-- Heading -->
+                <a href="#"><h1>{{ post.config.title }}</h1></a>
+                <hr>
+                <div class="in-content">
+                    <p>
+                        {{ post.summary }}
+                    </p>
+                    <a class="read-more" href="{{ config.site.urlBase }}/{{ post.slug }}">Read more</a>
+                </div>
+                <div class="foot-post">
+                    <div class="units-row">
+                        <div class="unit-100">
+                            <strong>Tags:</strong>
+                            <a href="#">Galaxy</a>,
+                            <a href="#">Human</a>,
+                            <a href="#">World</a>,
+                        </div>
+                        {#<div class="unit-100">
+                            <strong>COMMENTS:</strong> 
+                            <a href="#">3</a>
+                        </div>#}
+                    </div>
+                </div>
+            </div>
+            <!-- /post -->
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

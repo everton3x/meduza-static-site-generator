@@ -91,9 +91,23 @@ class Builder
         //</parse conteúdo>
         
         //<merge temas>
+        $logger->notice("Mesclando o conteúdo com os templates...");
+        $processMergeTemplate= new \Meduza\Process\MergeTemplate($buildRepo, $logger);
+        $buildRepo = $processMergeTemplate->run();
+        $logger->debug('Foram mescladas {meta-pages} meta-páginas.', [
+            'meta-pages' => count($buildRepo->get('meta-pages'))
+        ]);
+//        print_r($buildRepo->get('output'));
         //</merge temas>
         
         //<salva output>
+        $logger->notice("Salvando o HTML...");
+        $processSaveOutput= new \Meduza\Process\SaveOutput($buildRepo, $logger);
+        $buildRepo = $processSaveOutput->run();
+        $logger->debug('Foram salvas {meta-pages} meta-páginas.', [
+            'meta-pages' => count($buildRepo->get('meta-pages'))
+        ]);
+//        print_r($buildRepo->get('output'));
         //</salva output>
         
         //<copia conteúdo estático>

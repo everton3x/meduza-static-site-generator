@@ -67,32 +67,60 @@ class Directory
         $nodes = [];
 
         while ($iterator->valid()) {
-            if(($node = $this->filterByMode($mode, $iterator->current()))){
+            if ($iterator->isDot()) {
+                $iterator->next();
+                continue;
+            }
+            if (($node = $this->filterByMode($mode, $iterator->current()))) {
                 $nodes[$node->getPathname()] = $node;
             }
             $iterator->next();
         }
-        
+
         return $nodes;
     }
-    
+
     public function realpath(): Directory
     {
         $this->path = (new Path(\realpath($this->path)))->endSlash()->get();
         return $this;
     }
-    
+
     public function get(bool $object = false)
     {
-        if($object){
+        if ($object) {
             return new \Directory($this->path);
-        }else{
+        } else {
             return $this->path;
         }
     }
-    
+
     public function __toString(): string
     {
         return $this->path;
+    }
+    
+    public function remove(): Directory
+    {
+//        echo $this->path, PHP_EOL;exit();
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->path));
+        
+        while($iterator->valid()){
+            $item = $iterator->current();
+            echo $item->getPathname(), PHP_EOL;
+//            print_r($item);
+//            if($item->getFilename() === '.' || $item->getFilename() === '..'){
+//                //não faz nada
+//            }elseif($item->isFile()){
+////                unlink($item->getPathname());
+//            }elseif ($item->isDir()) {
+//                (new Directory($item->getPathname()))->remove();
+////                rmdir($item->getPathname());
+////                echo $item->getPathname(), PHP_EOL;
+//            }
+            $iterator->next();
+        }
+        
+        return $this;
     }
 }

@@ -76,4 +76,16 @@ class File
     {
         return $this->path;
     }
+    
+    public function get(bool $handle = false)
+    {
+        if($handle){
+            if(is_null($this->handle)){
+                $this->open();
+            }
+            return $this->handle;
+        }else{
+            return $this->path;
+        }
+    }
 }

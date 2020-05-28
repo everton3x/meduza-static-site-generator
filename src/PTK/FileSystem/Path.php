@@ -33,7 +33,7 @@ class Path
 
     public function join(string ...$pieces): Path
     {
-        $this->path = \join(DIRECTORY_SEPARATOR, $pieces);
+        $this->path = \str_replace(['//', '\\\\'], DIRECTORY_SEPARATOR, \join(DIRECTORY_SEPARATOR, $pieces));
         return $this;
     }
 

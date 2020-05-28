@@ -26,8 +26,9 @@ class LoadContent
         $this->logger->debug('Lendo conteúdo de {path}', ['path' => $contentDirPath]);
         
         $contentDir = new \PTK\FileSystem\Directory($contentDirPath);
+//        print_r($contentDir);exit();
         $this->buildRepo->set('content', $contentDir->realpath()->read(true, \PTK\FileSystem\Directory::ONLY_FILES));
-        
+//        print_r($this->buildRepo->get('content'));exit();
         return $this->buildRepo;
     }
 }
