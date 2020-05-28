@@ -60,4 +60,9 @@ class Path
         $this->path = str_replace(['/', '\\'], $slash, $this->path);
         return $this;
     }
+    
+    public function __toString(): string
+    {
+        return $this->path;
+    }
 }

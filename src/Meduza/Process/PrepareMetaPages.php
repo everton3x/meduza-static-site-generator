@@ -77,6 +77,6 @@ class PrepareMetaPages implements ProcessInterface
         }
         
         
-        return "{$slug}.html";
+        return "{$slug}";
     }
 }

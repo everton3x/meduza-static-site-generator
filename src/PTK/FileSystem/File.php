@@ -71,4 +71,9 @@ class File
         @fclose($this->handle);
         return $this;
     }
+    
+    public function __toString(): string
+    {
+        return $this->path;
+    }
 }

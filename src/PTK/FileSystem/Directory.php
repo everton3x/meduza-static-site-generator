@@ -90,4 +90,9 @@ class Directory
             return $this->path;
         }
     }
+    
+    public function __toString(): string
+    {
+        return $this->path;
+    }
 }

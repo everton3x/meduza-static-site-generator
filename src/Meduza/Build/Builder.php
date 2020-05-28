@@ -81,6 +81,13 @@ class Builder
         //</plugins>
         
         //<parse conteúdo>
+        $logger->notice("Traduzindo conteúdo para HTML...");
+        $processParseToHTML = new \Meduza\Process\ParseToHTML($buildRepo, $logger);
+        $buildRepo = $processParseToHTML->run();
+        $logger->debug('Foram traduzidas {meta-pages} meta-páginas.', [
+            'meta-pages' => count($buildRepo->get('meta-pages'))
+        ]);
+//        print_r($buildRepo);
         //</parse conteúdo>
         
         //<merge temas>
