@@ -114,12 +114,12 @@ class Builder
         $logger->notice("Copiando conteúdo estático do site...");
         $processCopyStaticContent= new \Meduza\Process\CopyStaticContent($buildRepo, $logger);
         $buildRepo = $processCopyStaticContent->run();
-        $logger->debug('Foram salvas {meta-pages} meta-páginas.', [
-            'meta-pages' => count($buildRepo->get('meta-pages'))
-        ]);
         //</copia conteúdo estático>
         
         ////<copia conteúdo estático do tema>
+        $logger->notice("Copiando conteúdo estático do tema...");
+        $processCopyStaticTheme= new \Meduza\Process\CopyStaticTheme($buildRepo, $logger);
+        $buildRepo = $processCopyStaticTheme->run();
         //</copia conteúdo estático do tema>
     }
 }
