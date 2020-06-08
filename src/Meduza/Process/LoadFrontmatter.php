@@ -33,9 +33,6 @@ class LoadFrontmatter implements ProcessInterface
 
         $this->injectDateOfModification($frontmatter);
 
-        print_r($frontmatter);
-        exit();
-
         $this->buildRepo->set('meta-data', $frontmatter);
 
         return $this->buildRepo;

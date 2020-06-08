@@ -77,6 +77,19 @@ class Builder
 //        print_r($buildRepo);
         //</constroi meta-paginas>
         
+        //<constroi ordenação de conteúdo por data>
+        $logger->notice("Construindo ordenação por data...");
+        $processOrdeningContentByDate = new \Meduza\Process\OrdeningContentByDate($buildRepo, $logger);
+        $buildRepo = $processOrdeningContentByDate->run();
+        $logger->debug('Foram ordenadas {meta-pages} meta-páginas.', [
+            'meta-pages' => count($buildRepo->get('meta-pages'))
+        ]);
+//        foreach ($buildRepo->get('meta-pages') as $key => $metapage){
+//            echo $metapage['slug'], PHP_EOL;
+//        }
+//        print_r($buildRepo);
+        //</constroi ordenação de conteúdo por data>
+        
         //<plugins>
         //</plugins>
         
