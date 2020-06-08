@@ -1,6 +1,5 @@
 ---
 title: "Tópicos de Direito Constitucional"
-date: "2020-05-20"
 summary: "Tópicos de Direito Constitucional para saber no dia a dia."
 description: "Tópicos de Direito Constitucional para saber no dia a dia."
 categories:
