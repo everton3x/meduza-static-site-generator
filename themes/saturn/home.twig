@@ -17,7 +17,11 @@
 
     <!-- Content -->
     <div class="content">
-        <div class="container">
+        
+        {% for link in plugin.index-by-date %}
+            <p>{{ link }}</p>
+        {% endfor %}
+        {#<div class="container">
             {% for post in pages %}
             <!-- Post -->
             <div class="post">
@@ -42,12 +46,12 @@
                             <strong>COMMENTS:</strong> 
                             <a href="#">3</a>
                         </div>#}
-                    </div>
+                    {#</div>
                 </div>
             </div>
             <!-- /post -->
             {% endfor %}
-        </div>
+        </div>#}
     </div>
 {% endblock %}
 

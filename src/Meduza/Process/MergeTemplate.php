@@ -58,7 +58,8 @@ class MergeTemplate
             'config' => $config,
             'page' => [
                 'config' => $page['meta-data'],
-                'content' => $page['html']
+                'content' => $page['html'],
+                'plugin' => $page['plugin'] ??= []
             ]
         ]);
     }

@@ -40,7 +40,7 @@ class PrepareMetaPages implements ProcessInterface
 
             $slug = $this->getSlug($metaDataList[$filePath], $filePath);
             $metaPages[$slug]['slug'] = $slug;
-
+            $metaDataList[$filePath]['slug'] = $slug;
             $metaPages[$slug]['meta-data'] = $metaDataList[$filePath];
 
             if (!key_exists($filePath, $parsableList)) {
@@ -53,6 +53,7 @@ class PrepareMetaPages implements ProcessInterface
             $metaPages[$slug]['dirPath'] = (new \PTK\FileSystem\Path($fileObj->getPath()))->endSlash()->get();
         }
         $this->buildRepo->set('meta-pages', $metaPages);
+        $this->buildRepo->set('meta-data', $metaDataList);
 
         return $this->buildRepo;
     }
